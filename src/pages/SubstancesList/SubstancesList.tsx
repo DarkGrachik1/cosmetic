@@ -1,6 +1,6 @@
 import "./SubstancesList.sass"
 import SearchBar from "../../components/SearchBar/SearchBar";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import SubstanceCard from "./SubstanceCard/SubstanceCard";
 import {iSubstancesMock, requestTime} from "../../utils/consts";
 import {Substance} from "../../utils/types";
@@ -17,7 +17,7 @@ const SubstancesList = () => {
 
         try {
 
-            const response = await fetch(`http://localhost:8000/api/substances/search?&query=${query}`, {
+            const response = await fetch(`http://localhost:8000/api/substances/search/?&query=${query}`, {
                 method: "GET",
                 signal: AbortSignal.timeout(requestTime)
             })
@@ -55,7 +55,7 @@ const SubstancesList = () => {
         <SubstanceCard substance={substance} key={substance.id} isMock={isMock}/>
     ))
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         searchSubstances()
     }
@@ -63,7 +63,7 @@ const SubstancesList = () => {
     return (
         <div className="cards-list-wrapper">
 
-            <form className="top" onSubmit={handleSubmit}>
+            <form className="top" onSubmit={(e) => handleSubmit(e)}>
 
                 <h2>Поиск веществ</h2>
 
