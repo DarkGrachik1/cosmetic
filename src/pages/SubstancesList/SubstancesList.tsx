@@ -43,7 +43,7 @@ const SubstancesList = () => {
     const createMock = () => {
 
         setIsMock(true);
-        setSubstances(iSubstancesMock)
+        setSubstances(iSubstancesMock.filter(substance => substance.name.toLowerCase().includes(query)))
 
     }
 
